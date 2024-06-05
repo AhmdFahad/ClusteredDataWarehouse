@@ -1,3 +1,7 @@
+#here i muse ignore the .env but to showcase of my configuration style i haven't`
+#Todo:ignore it
+#.env
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
