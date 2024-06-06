@@ -12,8 +12,8 @@ This project stores accepted FX deals into the Bloomberg data warehouse for anal
 ## Setup
 1. Clone the repository & change directory:
    ```sh
-   git clone https://github.com/yourusername/fx-deals-data-warehouse.git
-   cd fx-deals-data-warehouse
+   git clone https://github.com/AhmdFahad/ClusteredDataWarehouse.git
+   cd ClusteredDataWarehouse/
 
 2. run the application:
    ```sh

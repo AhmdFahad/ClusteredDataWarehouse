@@ -13,7 +13,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
   clustered_data_warehouse:
-    image: ahmd66699/clustered-data-warehouse:0.0.1-SNAPSHOT
+    image: ahmd66699/clustered-data-warehouse:1.0.0-SNAPSHOT
     ports:
       - "8080:8080"
     networks:
