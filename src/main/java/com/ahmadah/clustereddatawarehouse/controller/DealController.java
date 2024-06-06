@@ -2,6 +2,7 @@ package com.ahmadah.clustereddatawarehouse.controller;
 
 import com.ahmadah.clustereddatawarehouse.model.Deal;
 import com.ahmadah.clustereddatawarehouse.service.DealService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class DealController {
         return dealService.getAllDeals();
     }
     @PostMapping("/")
-    public ResponseEntity<String> addDeal(@RequestBody Deal deal) {
+    public ResponseEntity<String> addDeal(@Valid @RequestBody  Deal deal) {
         try {
             var d=dealService.addDeal(deal);
             return ResponseEntity.ok("Deal added successfully :"+d.toString());
