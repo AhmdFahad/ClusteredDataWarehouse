@@ -12,7 +12,7 @@ import java.util.Date;
 @ToString
 public class ErrorResponse {
     private String error;
-    private String massage;
+    private String message;
     private String status;
     @Builder.Default
     private Date timestamp=new Date();
