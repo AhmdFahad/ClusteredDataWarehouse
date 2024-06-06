@@ -12,6 +12,15 @@ services:
       - warehouse-network
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  clustered_data_warehouse:
+    image: ahmd66699/clustered-data-warehouse:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    networks:
+      - warehouse-network
+    depends_on:
+      - postgresql
+
 networks:
   warehouse-network:
       driver: bridge
