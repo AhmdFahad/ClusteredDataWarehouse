@@ -8,6 +8,7 @@ class ClusteredDataWarehouseApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
