@@ -57,7 +57,7 @@ class DealServiceTest {
         when(dealRepository.existsByDealId(mockdeal.getDealId())).thenReturn(false);
         when(dealRepository.save(any(Deal.class))).thenReturn(mockdeal);
 
-        Deal result = dealService.addDeal(mockdeal);
+        Deal result = dealService.saveDeal(mockdeal);
 
         assertNotNull(result);
         assertEquals(mockdeal.getDealId(), result.getDealId());
@@ -76,7 +76,7 @@ class DealServiceTest {
                 .build();
         when(dealRepository.existsByDealId(deal.getDealId())).thenReturn(true);
 
-        assertThrows(DealAlreadyExistsException.class, () -> dealService.addDeal(deal));
+        assertThrows(DealAlreadyExistsException.class, () -> dealService.saveDeal(deal));
 
         verify(dealRepository, times(1)).existsByDealId(deal.getDealId());
         verify(dealRepository, never()).save(any(Deal.class));

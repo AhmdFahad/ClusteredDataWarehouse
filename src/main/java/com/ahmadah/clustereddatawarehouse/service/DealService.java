@@ -20,7 +20,7 @@ public class DealService {
         return dealRepository.findAll();
     }
 
-    public Deal addDeal(Deal deal) {
+    public Deal saveDeal(Deal deal) {
         if(dealRepository.existsByDealId(deal.getDealId()))
             throw new DealAlreadyExistsException("Deal with ID " + deal.getDealId() + " already exists.");
 

@@ -20,8 +20,8 @@ public class DealController {
         return dealService.getAllDeals();
     }
     @PostMapping("/")
-    public ResponseEntity<Deal> addDeal(@Valid @RequestBody Deal deal) {
-            var d=dealService.addDeal(deal);
+    public ResponseEntity<Deal> saveDeal(@Valid @RequestBody Deal deal) {
+            var d=dealService.saveDeal(deal);
             return ResponseEntity.ok(d);
         }
 
