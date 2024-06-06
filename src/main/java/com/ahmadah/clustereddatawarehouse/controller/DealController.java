@@ -5,14 +5,12 @@ import com.ahmadah.clustereddatawarehouse.service.DealService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1/api/deals")
 @RequiredArgsConstructor
 public class DealController {
     private final DealService dealService;
@@ -22,12 +20,9 @@ public class DealController {
         return dealService.getAllDeals();
     }
     @PostMapping("/")
-    public ResponseEntity<String> addDeal(@Valid @RequestBody  Deal deal) {
-        try {
+    public ResponseEntity<String> addDeal(@Valid @RequestBody Deal deal) {
             var d=dealService.addDeal(deal);
             return ResponseEntity.ok("Deal added successfully :"+d.toString());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
+
 }

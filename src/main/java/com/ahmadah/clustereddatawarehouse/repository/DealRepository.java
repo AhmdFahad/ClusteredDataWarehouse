@@ -4,4 +4,6 @@ import com.ahmadah.clustereddatawarehouse.model.Deal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DealRepository extends JpaRepository<Deal,String> {
+    boolean existsByDealId(String dealID);
+
 }

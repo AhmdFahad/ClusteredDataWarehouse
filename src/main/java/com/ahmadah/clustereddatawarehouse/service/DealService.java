@@ -1,5 +1,6 @@
 package com.ahmadah.clustereddatawarehouse.service;
 
+import com.ahmadah.clustereddatawarehouse.exception.DealAlreadyExistsException;
 import com.ahmadah.clustereddatawarehouse.model.Deal;
 import com.ahmadah.clustereddatawarehouse.repository.DealRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,9 @@ public class DealService {
     }
 
     public Deal addDeal(Deal deal) {
-
-       return dealRepository.save(deal);
+        if(!dealRepository.existsByDealId(deal.getDealId()))
+        return dealRepository.save(deal);
+        else
+            throw new DealAlreadyExistsException("Deal with ID " + deal.getDealId() + " already exists.");
     }
 }

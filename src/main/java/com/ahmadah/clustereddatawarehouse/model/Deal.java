@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Deal {
     @Id
     @NotNull
-    private String dealUniqueId;
+    private String dealId;
     @NotNull
     private String fromCurrencyIsoCode;
     @NotNull
