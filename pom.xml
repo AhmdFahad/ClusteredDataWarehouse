@@ -11,10 +11,11 @@
     <groupId>com.ahmadah</groupId>
     <artifactId>ClusteredDataWarehouse</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ClusteredDataWarehouse</name>
+    <name>clustered-data-warehouse</name>
     <description>ClusteredDataWarehouse</description>
     <properties>
         <java.version>21</java.version>
+        <image.registry>ahmd66699</image.registry>
     </properties>
     <dependencies>
         <dependency>
@@ -72,7 +73,45 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.44.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${image.registry}/${project.name}</name>
+                            <build>
+                                <dockerFile>${project.basedir}/Dockerfile</dockerFile>
+                                <tags>
+                                    <tag>latest</tag>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
         </plugins>
+        <finalName>${project.name}</finalName>
+
     </build>
+    <profiles>
+
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <active>prod</active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
