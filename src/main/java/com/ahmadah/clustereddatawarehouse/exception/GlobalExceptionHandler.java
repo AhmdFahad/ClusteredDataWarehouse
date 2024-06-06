@@ -1,5 +1,7 @@
 package com.ahmadah.clustereddatawarehouse.exception;
 
+import com.ahmadah.clustereddatawarehouse.response.ErrorResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,14 +11,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(DealAlreadyExistsException.class)
-    public ResponseEntity<String> handleDealAlreadyExistsException(DealAlreadyExistsException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    public ResponseEntity<com.ahmadah.clustereddatawarehouse.response.ErrorResponse> handleDealAlreadyExistsException(DealAlreadyExistsException e, HttpServletRequest request) {
+        var errorResponse=ErrorResponse.builder()
+                .error("Deal Already Exists")
+                .massage(e.getMessage())
+                .status(HttpStatus.CONFLICT.toString())
+                .path(request.getRequestURI())
+                .build();
+            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -25,7 +32,7 @@ public class GlobalExceptionHandler {
                 .getFieldErrors()
                 .stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .collect(Collectors.toList());
+                .toList();
 
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("status", HttpStatus.BAD_REQUEST.value());
